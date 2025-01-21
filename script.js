@@ -1,95 +1,112 @@
-    let form = document.getElementById("form")
-    let name = document.getElementById("name")
-    let age = document.getElementById("age")
-    let tel = document.getElementById("tel")
-    let btn = document.getElementById("btn")
-    let eror = document.getElementById("eror")
-    let table = document.getElementById("table")
-
-    let data = [];
-
-
-btn.addEventListener("click",function(event) {
-    event.preventDefault();
-
-    let userobj = {
-        name:name.value,
-        age:age.value,
-        phone:tel.value,
-        
-    };
-
-    data.push(userobj);
-
-    console.log(data);
-    
-    data.forEach(function (value){
-        table.innerHTML = `
-        <tr>
-        <td>${value.name}</td>
-        <td>${value.age}</td>
-        <td>${value.phone}</td>
-      </tr>
-        `
-    })
-}  )
-
+let form = document.getElementById('form');
+let nameInput = document.getElementById('name');
+let ageInput = document.getElementById('age');
+let telInput = document.getElementById('tel');
+let monthInput = document.getElementById('month');
+let table = document.getElementById('table').querySelector('tbody');
+let data = [];
 
 document.getElementById('btn').addEventListener('click', function (e) {
     e.preventDefault(); 
     let isValid = true;
 
+    let name = nameInput.value.trim();
+    let age = ageInput.value.trim();
+    let phone = telInput.value.trim();
+    let month = monthInput.value.trim();
+    let radio = document.querySelector('input[name="fav_language"]:checked');
 
-    const name = document.getElementById('name').value;
-    const nameError = document.getElementById('name-eror');
-    if (!name.trim()) {
+    let nameError = document.getElementById('name-eror');
+    let ageError = document.getElementById('eror');
+    let phoneError = document.getElementById('tel-eror');
+    let monthError = document.getElementById('month-eror');
+    let radioError = document.getElementById('radio-eror');
+
+    if (!name) {
         nameError.textContent = 'Name kiriting';
         isValid = false;
     } else {
         nameError.textContent = '';
     }
 
-
-    let age = document.getElementById('age').value;
-    let ageError = document.getElementById('eror');
-    if (!age.trim()) {
-        ageError.textContent = 'Age kiriting';
-        ageError.style.color = 'red';
+    if (!age || isNaN(age)) {
+        ageError.textContent = 'Yoshingizni kiriting (faqat raqam)';
         isValid = false;
     } else {
         ageError.textContent = '';
     }
 
-
-    let phone = document.getElementById('tel').value;
-    let phoneError = document.getElementById('tel-eror');
-    if (!phone.trim() || phone === '+998') {
-        phoneError.textContent = 'Telefon raqam kiriting';
-        phoneError.style.color = 'red';
+    if (!phone || phone.length < 9 || !phone.startsWith('+998')) {
+        phoneError.textContent = 'To‘g‘ri telefon raqamini kiriting';
         isValid = false;
     } else {
         phoneError.textContent = '';
     }
 
-    const month = document.getElementById('month').value;
-    const monthError = document.getElementById('month-eror');
-    if (!month.trim()) {
+    if (!month) {
         monthError.textContent = 'Oy tanlang';
-        monthError.style.color = 'red';
         isValid = false;
     } else {
         monthError.textContent = '';
     }
 
-    const radio = document.querySelector('input[name="fav_language"]:checked');
-    const radioError = document.getElementById('radio-eror');
     if (!radio) {
         radioError.textContent = 'Jinsni tanlang';
         isValid = false;
     } else {
-        genderError.textContent = '';
+        radioError.textContent = '';
     }
-   
+
+    if (isValid) {
+        let userObj = {
+            name: name,
+            age: age,
+            phone: phone,
+            month: month,
+            gender: radio.value,
+        };
+
+        data.push(userObj);
+
+        table.innerHTML = '';
+        data.forEach((value) => {
+            let row = `
+            <tr>
+                <td>${value.name}</td>
+                <td>${value.age}</td>
+                <td>${value.phone}</td>
+                <td>${value.month}</td>
+                <td>${value.gender}</td>
+            </tr>
+            `;
+            table.innerHTML += row;
+        });
+
+        form.reset();
+    }
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+localStorage.setItem("data", JSON.stringify(data));
+
+
+(function (){
+    data = JSON.parse(localStorage.getItem("data"))
+    ? JSON.parse(localStorage.getItem("data"))
+    : [];
+
+    console.log(data);
+    
+    readuser()
+})()

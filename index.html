@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <div class="max-w-[1000px] mx-auto">
-      <h1 class="my-4">CRUD APP</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <form id="form" class="max-w-[1000px] mx-auto">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Ismingizni kiriting">
+        <span id="name-eror" style="color: red;"></span><br><br>
 
-      <form action="" class="border w-[70%] flex flex-col p-[50px]" id="form">
-        <div class="flex p-[40px]">
-          <label class="">
-            <span>First name</span>
-            <input type="text" class="border-2 rounded-lg p-[5px]" id="name" required />
-            <p id="name-eror" class="text-[red]"></p>
-          </label>
-  
-          <label>
-            <span>Last name</span>
-            <input type="text" class="border-2 rounded-lg gap-4 p-[5px] pt-[5px]" id="namels" required />
-            <p id="name-eror" class="text-[red]"></p>
-          </label>
-        </div>
+        <label for="age">Age:</label>
+        <input type="text" id="age" placeholder="Yoshingizni kiriting">
+        <span id="eror" style="color: red;"></span><br><br>
 
-        <label class="p-[40px]">
-          <span></span>
-          <input type="radio" id="html" name="fav_language" value="HTML" />
-          <label for="html">erkak</label><br />
-          <input type="radio"  id="css" name="fav_language" value="CSS" />  
-          <label for="html">ayol</label><br />
-         
-          <p id="radio-eror" class="text-[red]"></p>
-        </label>
+        <label for="tel">Phone:</label>
+        <input type="text" id="tel" placeholder="+998XXXXXXXXX">
+        <span id="tel-eror" style="color: red;"></span><br><br>
 
-        <label class="p-[40px] ">
-          <span>age</span>
-          <input type="number" class=" border-2 rounded-lg p-[10px]" id="age" required />
-          <p id="eror"></p>
-        </label>
+        <label for="month">Month:</label>
+        <select id="month">
+            <option value="">Tanlang</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            
+        </select>
+        <span id="month-eror" style="color: red;"></span><br><br>
 
-        <label class="p-[40px]">
-          <span>month</span>
-          <input type="month" class="border-2 rounded-lg p-[10px]" id="month" required />
-          <p id="month-eror"></p>
-        </label>
+        <label>Gender:</label>
+        <input type="radio" name="fav_language" value="Male"> Male
+        <input type="radio" name="fav_language" value="Female"> Female
+        <span id="radio-eror" style="color: red;"></span><br><br>
 
-        <label class="p-[40px]">
-          <span>phone number</span>
-          <input type="tel" value="+998" class="border-2 rounded-lg p-[10px]" id="tel" required />
-          <p id="tel-eror"></p>
-        </label>
-        <button class="border w-[200px] p-[10px] mx-auto bg-[blue] text-[white  ] rounded-lg" id="btn">yuborish</button>
-      </form>
+        <button id="btn" type="submit">Yuborish</button>
+    </form>
 
-      <table id="table"></table>
-    </div>
+    <table border="1" id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Phone</th>
+                <th>Month</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+    </table>
+   
 
-    <script src="./script.js"></script>
-  </body>
+
+
+    <script src="script.js"></script>
+</body>
 </html>
