@@ -45,9 +45,9 @@
       }
       
       button {
-        width: 100%;
+        width: 100px;
         padding: 10px;
-        background-color: #141514;
+        background-color: #003b79;
         color: white;
         border: none;
         border-radius: 5px;
@@ -74,5 +74,32 @@
       
       table th {
         background-color: #000000;
+        color: white;
+      }
+
+      .button-container {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .edit-btn, .delete-btn {
+        width: 50px;
+        padding: 10px;
+        position: absolute;
+        top: 0 ;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      .edit-btn {
+        background-color: #3498db;
+        color: white;
+      }
+      
+      .delete-btn {
+        background-color: #e74c3c;
         color: white;
       }
