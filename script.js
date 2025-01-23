@@ -91,13 +91,6 @@ document.getElementById('btn').addEventListener('click', function (e) {
 
 
 
-
-
-
-
-
-
-
 localStorage.setItem("data", JSON.stringify(data));
 
 
@@ -108,7 +101,68 @@ localStorage.setItem("data", JSON.stringify(data));
 
     console.log(data);
     
-    readuser()
-})()
+})();
+
+
+let deleteBtn = document.getElementById("deleteBtn");
+let editBtn = document.getElementById("editBtn");
+
+deleteBtn.addEventListener("click", () => {
+  if (confirm("Haqiqatan o'chirmoqchimisiz?")) {
+    data = [];
+    table.innerHTML = ""; 
+    localStorage.removeItem("data");
+    alert("Barcha ma'lumotlar o'chirildi.");
+  }
+});
+
+
+editBtn.addEventListener("click", () => {
+  let editIndex = prompt("Qaysi foydalanuvchini tahrirlashni xohlaysiz? (0 dan boshlab raqam kiriting):");
+  if (editIndex !== null && !isNaN(editIndex) && data[editIndex]) {
+    
+    let user = data[editIndex];
+    let newName = prompt("Yangi ismni kiriting:", user.name);
+    let newAge = prompt("Yangi yoshni kiriting:", user.age);
+    let newPhone = prompt("Yangi telefonni kiriting:", user.phone);
+    let newMonth = prompt("Yangi oyning nomini kiriting:", user.month);
+    let newGender = prompt("Yangi jinsni kiriting (Erkak/Ayol):", user.gender);
+
+    if (newName && newAge && newPhone && newMonth && newGender) {
+
+      data[editIndex] = {
+        name: newName,
+        age: newAge,
+        phone: newPhone,
+        month: newMonth,
+        gender: newGender,
+      };
+
+ 
+      table.innerHTML = "";
+      data.forEach((value) => {
+        let row = `
+        <tr>
+            <td>${value.name}</td>
+            <td>${value.age}</td>
+            <td>${value.phone}</td>
+            <td>${value.month}</td>
+            <td>${value.gender}</td>
+        </tr>
+        `;
+        table.innerHTML += row;
+      });
+
+      
+      localStorage.setItem("data", JSON.stringify(data));
+      alert("Ma'lumot muvaffaqiyatli yangilandi!");
+    } else {
+      alert("Tahrirlash bekor qilindi yoki noto'g'ri qiymat kiritildi.");
+    }
+  } else {
+    alert("Kiritilgan indeks noto'g'ri yoki mavjud emas.");
+  }
+});
+
 
 
